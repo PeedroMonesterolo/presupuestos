@@ -1,0 +1,98 @@
+<mat-card class="form-card">
+  <form (ngSubmit)="generarPresupuesto()" class="form-grid">
+    <h2>Datos del Cliente</h2>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="cliente.nombre" name="nombre">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="cliente.telefono" name="telefono">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Correo</mat-label>
+      <input matInput [(ngModel)]="cliente.correo" name="correo">
+    </mat-form-field>
+
+
+    <h2>Datos del Vehículo</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Marca</mat-label>
+      <input matInput [(ngModel)]="cliente.vehiculo.marca" name="marca">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Modelo</mat-label>
+      <input matInput [(ngModel)]="cliente.vehiculo.modelo" name="modelo">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Año</mat-label>
+      <input matInput type="number" [(ngModel)]="cliente.vehiculo.anio" name="año">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Patente</mat-label>
+      <input matInput [(ngModel)]="cliente.vehiculo.placas" name="placas">
+    </mat-form-field>
+
+    <h2>Servicios</h2>
+    <div class="servicio-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <input matInput [(ngModel)]="descripcion" name="descripcion">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input matInput type="number" [(ngModel)]="precio" name="precio">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="agregarServicio()">Agregar</button>
+    </div>
+
+    <mat-list>
+      <mat-list-item *ngFor="let serv of servicios">
+        {{ serv.descripcion }} — <strong>${{ serv.precio }}</strong>
+      </mat-list-item>
+    </mat-list>
+
+    <div class="actions">
+      <button mat-raised-button color="accent" type="submit">Generar Presupuesto</button>
+    </div>
+  </form>
+
+  <div *ngIf="presupuesto" class="pdf-output">
+    <app-presupuesto-pdf [presupuesto]="presupuesto"></app-presupuesto-pdf>
+  </div>
+</mat-card>
+
+<style>
+  .form-card {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .servicio-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+
+  .pdf-output {
+    margin-top: 2rem;
+    text-align: center;
+  }
+</style>
