@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PresupuestoPdfComponent } from '../presupuesto-pdf/presupuesto-pdf.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-presupuesto-form',
@@ -21,7 +22,11 @@ import { PresupuestoPdfComponent } from '../presupuesto-pdf/presupuesto-pdf.comp
     MatCardModule,
     FormsModule,
     PresupuestoPdfComponent,
-    MatListModule
+    MatListModule,
+    NgxMaskDirective
+  ],
+  providers: [
+    provideNgxMask()
   ]
   // styleUrls: ['./presupuesto-form.component.scss']
 })

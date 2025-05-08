@@ -1,98 +1,127 @@
-<mat-card class="form-card">
-  <form (ngSubmit)="generarPresupuesto()" class="form-grid">
-    <h2>Datos del Cliente</h2>
-    <br>
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="cliente.nombre" name="nombre">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Teléfono</mat-label>
-      <input matInput [(ngModel)]="cliente.telefono" name="telefono">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Correo</mat-label>
-      <input matInput [(ngModel)]="cliente.correo" name="correo">
-    </mat-form-field>
+<mat-card class="form-card container">
+  <div class="d-flex align-items-center">
+    <div class="text-center border-logo">
+      <img src="assets/logos/mecanica_narvaja.png" class="logo" alt="Mecanica General Narvaja">
+    </div>
+    <div>
+      <h2 class="px-4">Generador de Presupuesto</h2>
+    </div>
+  </div>
 
+  <form (ngSubmit)="generarPresupuesto()" class="row g-3 p-2">
+    <div class="col-12">
+      <h2>Datos del Cliente</h2>
+    </div>
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="cliente.nombre" name="nombre">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Teléfono</mat-label>
+        <input matInput [(ngModel)]="cliente.telefono" name="telefono">
+      </mat-form-field>
+    </div>
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Correo</mat-label>
+        <input matInput [(ngModel)]="cliente.correo" name="correo">
+      </mat-form-field>
+    </div>
 
-    <h2>Datos del Vehículo</h2>
-    <mat-form-field appearance="outline">
-      <mat-label>Marca</mat-label>
-      <input matInput [(ngModel)]="cliente.vehiculo.marca" name="marca">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Modelo</mat-label>
-      <input matInput [(ngModel)]="cliente.vehiculo.modelo" name="modelo">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Año</mat-label>
-      <input matInput type="number" [(ngModel)]="cliente.vehiculo.anio" name="año">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Patente</mat-label>
-      <input matInput [(ngModel)]="cliente.vehiculo.placas" name="placas">
-    </mat-form-field>
+    <hr>
 
-    <h2>Servicios</h2>
-    <div class="servicio-grid">
-      <mat-form-field appearance="outline">
+    <div class="col-12">
+      <h2>Datos del Vehículo</h2>
+    </div>
+    <div class="col-md-3 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Marca</mat-label>
+        <input matInput [(ngModel)]="cliente.vehiculo.marca" name="marca">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Modelo</mat-label>
+        <input matInput [(ngModel)]="cliente.vehiculo.modelo" name="modelo">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Año</mat-label>
+        <input matInput type="number" [(ngModel)]="cliente.vehiculo.anio" name="año">
+      </mat-form-field>
+    </div>
+    <div class="col-md-3 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Patente</mat-label>
+        <input matInput [(ngModel)]="cliente.vehiculo.placas" name="placas">
+      </mat-form-field>
+    </div>
+
+    <hr>
+
+    <div class="col-12">
+      <h2>Servicios</h2>
+    </div>
+    <div class="col-md-6 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Descripción</mat-label>
         <input matInput [(ngModel)]="descripcion" name="descripcion">
       </mat-form-field>
-      <mat-form-field appearance="outline">
+    </div>
+    <div class="col-md-4 mb-3">
+      <mat-form-field appearance="outline" class="w-100">
         <mat-label>Precio</mat-label>
-        <input matInput type="number" [(ngModel)]="precio" name="precio">
+        <input matInput type="text" [(ngModel)]="precio" name="precio" mask="separator.2"
+        thousandSeparator=","
+        prefix="$">
       </mat-form-field>
-      <button mat-raised-button color="primary" type="button" (click)="agregarServicio()">Agregar</button>
+    </div>
+    <div class="col-md-2 d-flex align-items-end mb-3">
+      <button mat-raised-button color="primary" type="button" class="w-100" (click)="agregarServicio()">Agregar</button>
     </div>
 
-    <mat-list>
-      <mat-list-item *ngFor="let serv of servicios">
-        {{ serv.descripcion }} — <strong>${{ serv.precio }}</strong>
-      </mat-list-item>
-    </mat-list>
+    <div class="col-12">
+      <mat-list>
+        <mat-list-item *ngFor="let serv of servicios">
+          {{ serv.descripcion }} — <strong ngxMaskDirective>${{ serv.precio }}</strong>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
-    <div class="actions">
-      <button mat-raised-button color="accent" type="submit">Generar Presupuesto</button>
+    <div class="col-12 d-flex justify-content-end">
+      <button mat-raised-button color="accent" type="submit" class="btn btn-success">Generar Presupuesto</button>
     </div>
   </form>
 
-  <div *ngIf="presupuesto" class="pdf-output">
+  <div *ngIf="presupuesto" class="pdf-output mt-4">
     <app-presupuesto-pdf [presupuesto]="presupuesto"></app-presupuesto-pdf>
   </div>
 </mat-card>
 
 <style>
   .form-card {
-    max-width: 800px;
-    margin: 2rem auto;
+    margin-top: 2rem;
     padding: 2rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
-  }
-
-  .form-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  }
-
-  .servicio-grid {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
+    background: #fff;
   }
 
   .pdf-output {
-    margin-top: 2rem;
     text-align: center;
+  }
+
+  .border-logo {
+    border-right: 1px solid #dddddd;
+  }
+
+  .logo {
+    width: 150px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 </style>
